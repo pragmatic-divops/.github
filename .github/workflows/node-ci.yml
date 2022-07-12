@@ -3,7 +3,7 @@ name: Node.js CI
   push:
     branches:
       - master
-      - 'renovate/**'
+      - renovate/**
   pull_request:
     types:
       - opened
@@ -19,6 +19,7 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v3
         with:
-          node-version: 12.x
-      - uses: bahmutov/npm-install@v1
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm clean-install
       - run: npm test
